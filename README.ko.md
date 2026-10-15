@@ -5,8 +5,7 @@
 > ⚠️ **개발 중인 테스트 버전입니다 (0.1.0-dev).** 다른 PC에서 시험해 보기 위한 공개이며, 문제가 생길 수 있습니다.
 > - **설치 전에 몬헌 세이브를 꼭 백업하세요.** (Steam `userdata\<계정>\582010\remote` 폴더 전체)
 > - 오프라인 전용입니다. 온라인·구조 신호에서 쓰지 마세요.
-> - 개발자 PC 한 대(Windows 11, 4K 모니터)에서만 검증했습니다. 다른 환경에서는 동작하지 않을 수 있습니다.
-> - 문제가 생기면 `Uninstall.ps1`로 원래대로 되돌리고, 로그(`%TEMP%\mhwmc\mhw-bridge.log`, 마크 `logs\latest.log`)와 함께 GitHub Issues에 알려 주세요.
+> - 문제가 생기면 `Uninstall.ps1`로 원래대로 되돌리고 알려 주세요(GitHub Issues).
 
 ## 빠른 시작 (요약)
 1. **[Releases](../../releases)** 에서 `mhw-minecraft-bridge-windows-0.1.0-dev.zip`을 받아 압축을 풉니다.

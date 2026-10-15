@@ -5,9 +5,7 @@
 > ⚠️ **This is a work-in-progress test build (0.1.0-dev).** It is published so it can be tried on other PCs, and things may break.
 > - **Back up your Monster Hunter: World saves before installing** (the whole Steam `userdata\<account>\582010\remote` folder).
 > - Offline only. Do not use it online or with SOS flares.
-> - It has been verified on a single developer PC only (Windows 11, 4K monitor). It may not work on other setups.
-> - If something goes wrong, restore everything with `Uninstall.ps1` and open a GitHub Issue with your logs
->   (`%TEMP%\mhwmc\mhw-bridge.log` and Minecraft's `logs\latest.log`).
+> - If something goes wrong, restore everything with `Uninstall.ps1` and let us know (GitHub Issues).
 
 ## Quick start
 1. Download `mhw-minecraft-bridge-windows-0.1.0-dev.zip` from **[Releases](../../releases)** and unzip it.
