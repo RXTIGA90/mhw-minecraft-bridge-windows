@@ -69,3 +69,14 @@
 - In-game texts (F4 settings, menu-mode hint, quit message, key names, death messages) moved to
   lang files: `en_us.json` and new `ko_kr.json`. One jar; Minecraft's language setting picks the text.
 - READMEs: `README.md` (English) and `README.ko.md` (Korean).
+
+## Release test fixes (0.1.0-dev, after download test)
+- Loader (`dinput8.dll`) reserves 256 KB next to the exe at process start; the core frees it just before
+  hooking. One 4K start had every game hook fail with MH_ERROR_MEMORY_ALLOC (MHW's heaps had filled the
+  space MinHook needs within 2 GB of the code), so the hunter was never seen.
+- `Start-Session.bat` / quit script: pick a real Python that has vgamepad, skipping the Microsoft Store
+  "python" stub (it only opens the Store, so the virtual pad never started).
+- Quit script: presses LB until the System tab is read (a press during the menu animation was lost), and
+  reads the menu as white-on-black text (bright scenery made the "Save" row unreadable at 1920x1080).
+- Tested from the downloaded package on one PC: 1920x1080 window ~144 fps, 2560x1440 window ~120 fps,
+  3840x2160 borderless ~90 fps; composite + F12 save-and-quit worked in all three.
