@@ -16,8 +16,8 @@
    the MHW side (borderless full screen), Fabric for Minecraft 1.21.1, Fabric API, this mod, and a launcher profile
    **"MHW Bridge"** with its own folder (your other Minecraft worlds and mods are not touched).
    You only need Monster Hunter: World (Steam) and Minecraft Java Edition (official launcher, logged in once). No controller or driver.
-3. To play: put Steam in **offline mode** → double-click **`Play.bat`** (starts MHW) → enter the hub offline →
-   in the Minecraft Launcher choose **"MHW Bridge"** → Play. Finish with **F12** in Minecraft while in the hub.
+3. To play: put Steam in **offline mode** → double-click **`Play.bat`** (starts MHW and the Minecraft Launcher) → enter the hub offline →
+   press Play in the launcher ("MHW Bridge" is already selected). Finish with **Shift+F12** in Minecraft while in the hub.
 
 To remove everything: **`Uninstall.bat`**. Details below.
 ## What it is
@@ -35,10 +35,10 @@ Based on [justbustin/minecraft-crossover-bridge](https://github.com/justbustin/m
   image sent scaled down and stretched back by MHW
 - In-game texts follow Minecraft's language setting (English and Korean included)
 - Minecraft in a **window**, not full screen (F11 toggles it; full-screen Minecraft is not composited into MHW)
-- No controller or extra driver: while Minecraft runs, the mod gives MHW a built-in stand-in pad for the R/V/M keys and the F12 save.
+- No controller or extra driver: while Minecraft runs, the mod gives MHW a built-in stand-in pad for the R/V/M keys and the Shift+F12 save.
   Optional: the [ViGEmBus](https://github.com/nefarius/ViGEmBus/releases) driver + Python + `pip install vgamepad` lets
   `Save-And-Quit.bat` save MHW even when Minecraft is not running
-- For the F12 save only: MHW's text language set to **Korean** and the Korean language (with its OCR part) added in Windows
+- For the Shift+F12 save only: MHW's text language set to **Korean** and the Korean language (with its OCR part) added in Windows
   (Settings → Time & language → Language & region). Without these, save MHW by hand (see "Play" step 5)
 
 ## Install
@@ -59,33 +59,35 @@ for Minecraft **1.21.1**, and `bin\minecraft-mod\mhw-bridge-0.1.0-windows.jar` +
 (the `...+1.21.1` file) into the Fabric profile's `mods` folder.
 ## Play
 0. Put Steam in **offline mode** (Steam menu → Go Offline). Online, MHW shows the "Join a session" menu after character select.
-1. Run `Play.bat`: it starts MHW and the F12 quit watcher (keep its window open; a note about a missing virtual pad is fine).
+1. Run `Play.bat` (or the desktop shortcut "MHW Bridge Play"): it starts MHW **and** the Minecraft Launcher with "MHW Bridge" selected, plus the Shift+F12 quit watcher (keep its window open; a note about a missing virtual pad is fine).
 2. Enter the hub or a field **offline** in MHW. (No online play / SOS: this mod changes monster HP.)
 3. In the Minecraft Launcher pick the profile **"MHW Bridge"** and press Play (confirm the "modded" warning). If MHW covers the whole screen, Alt+Tab to the launcher. The "MHW Bridge" world opens automatically and the Minecraft window sits on top of MHW and takes the input.
    Minecraft must run **in a window**: if it opens full screen, press F11 (full-screen Minecraft shows up as a separate screen, not inside MHW).
 4. Going to a field: M (map) → F (world map) → Q/E (low/high rank) → WASD (region) → Enter.
-5. To finish press **F12** in Minecraft (or run `Save-And-Quit.bat`): saves the Minecraft world → brings MHW to the front and saves it
+5. To finish press **Shift+F12** in Minecraft (or run `Save-And-Quit.bat`): saves the Minecraft world → brings MHW to the front and saves it
    through its system menu → closes MHW. The mod stays installed; next time start again from step 1. Nothing ever rolls your saves back.
    - The MHW save reads the menu on screen, so it **only works with MHW's text language set to Korean**, the Windows Korean OCR
      language installed (included in Korean Windows). Don't touch the mouse or keyboard while it runs.
    - **MHW is only closed after the save file was actually updated.** If the save can't be done (other language, no OCR/pad, in a field
      or quest, loading screen), Minecraft still quits but MHW stays open: save by hand (start menu → System → Save) and quit MHW
      yourself. `%TEMP%\mhwmc\exit.log` says what happened (`saved through the menu (save file updated)` on success).
-   - MHW can only be saved manually in the hub, so press F12 in the hub.
+   - MHW can only be saved manually in the hub, so press Shift+F12 in the hub.
    - After a crash or power loss: Minecraft keeps its last autosave (about every 5 minutes), MHW its last auto/manual save.
+
+Bridge keys use **Shift + F-key**: plain F-keys belong to MHW (e.g. F8 = observation record).
 
 | Key | Action |
 |---|---|
 | R | Hunter interaction (talk, gather, carve; pad A). The Minecraft window must be in front |
 | V | MHW menu mode on/off: WASD cursor, arrow keys select, Enter confirm, Esc back, Q/E tabs, F = X, C = Y, Tab map, P start menu |
 | M | Open the MHW map + menu mode |
-| F6 | Composited inside MHW ⇄ separate window |
-| F7 | Camera: Minecraft drives MHW's camera ⇄ Minecraft follows MHW's camera |
-| F8 | Hand keyboard and mouse to the hunter (F8 in the MHW window to come back) |
-| F9 | Debug view (state, hitboxes, HP) |
-| F10 | Hunter stand-in on/off (a hidden hunter under Steve takes MHW's attacks for him) |
-| F12 | Save both games and quit (while the `Play.bat` window is open) |
-| F4 | Settings: ledge guard, arrow assist, blast assist, mobs vs monsters, explosion craters, [experimental] monsters blocked by buildings (off by default). Each on/off, saved in `config\mhwbridge.properties` |
+| Shift+F6 | Composited inside MHW ⇄ separate window |
+| Shift+F7 | Camera: Minecraft drives MHW's camera ⇄ Minecraft follows MHW's camera |
+| Shift+F8 | Hand keyboard and mouse to the hunter (Shift+F8 in the MHW window to come back) |
+| Shift+F9 | Debug view (state, hitboxes, HP) |
+| Shift+F10 | Hunter stand-in on/off (a hidden hunter under Steve takes MHW's attacks for him) |
+| Shift+F12 | Save both games and quit (while the `Play.bat` window is open) |
+| Shift+F4 | Settings: ledge guard, arrow assist, blast assist, mobs vs monsters, explosion craters, [experimental] monsters blocked by buildings (off by default). Each on/off, saved in `config\mhwbridge.properties` |
 
 Menu mode (V/M) ends with V or M again, or with a **mouse click**. Switching windows (Alt+Tab) releases any held keys.
 
@@ -125,7 +127,7 @@ delete it yourself if you like.
 - **Back up your saves.** The mod changes game state such as monster HP.
 
 ## Folder layout
-- `Setup.bat` one-click install, `Play.bat` start a session, `Uninstall.bat` remove everything, `Save-And-Quit.bat` same as F12
+- `Setup.bat` one-click install, `Play.bat` start a session, `Uninstall.bat` remove everything, `Save-And-Quit.bat` same as Shift+F12
 - `bin\` binaries (MHW DLLs, Minecraft mod jar)
 - `source\` full source (mhw-bridge: C++/MinHook, mc-bridge: Fabric mod)
 - `tools\` setup/session/quit scripts, optional virtual pad, core build script
