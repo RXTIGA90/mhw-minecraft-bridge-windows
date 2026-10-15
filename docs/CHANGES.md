@@ -142,3 +142,7 @@
 
 ## Icon
 - Project icon (`assets\`): desktop shortcut "MHW Bridge Play" made by Setup.bat (removed by Uninstall.bat), the launcher profile icon, the mod's icon in Minecraft, and the README logo.
+
+## Shift+F keys, one-click play
+- Bridge function keys need **Shift**: Shift+F4 settings, Shift+F6-F10, Shift+F12 save and quit; Shift+F8 in MHW switches back. Plain F-keys are MHW's own (F8 opened MHW's observation record and the bridge switch at once). Verified: plain F4/F12 do nothing, Shift+F4 opens settings, Shift+F12 saved and closed both games.
+- `Play.bat` (tools/Play.ps1) starts MHW **and** the Minecraft Launcher (Store or classic) with the "MHW Bridge" profile selected (its lastUsed is refreshed), then runs the Shift+F12 watcher. One click on Play in the launcher remains: the launcher has no supported way to start a profile by itself.
