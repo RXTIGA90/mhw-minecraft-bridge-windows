@@ -114,3 +114,6 @@
 - README (both): Fabric installer steps, launcher "modded" warning, Alt+Tab when MHW covers the screen,
   run MHW once before installing, same `-GameDir` for uninstall, FPS numbers with the render distance used,
   Korean README "소개" heading.
+- Borderless full screen (`Install.ps1 -Borderless`) tested at desktop resolutions 1920x1080 (~144 fps) and
+  2560x1440 (~128 fps) besides 3840x2160 (~90 fps); README now recommends it. TNT crater checked again in
+  Seliana: 93 blocks dug, MHW ground cut out on screen, Steve walked down into the hole (3-4 blocks deep).
