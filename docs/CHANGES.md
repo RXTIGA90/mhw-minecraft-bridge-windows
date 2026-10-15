@@ -79,4 +79,21 @@
 - Quit script: presses LB until the System tab is read (a press during the menu animation was lost), and
   reads the menu as white-on-black text (bright scenery made the "Save" row unreadable at 1920x1080).
 - Tested from the downloaded package on one PC: 1920x1080 window ~144 fps, 2560x1440 window ~120 fps,
-  3840x2160 borderless ~90 fps; composite + F12 save-and-quit worked in all three.
+  3840x2160 borderless ~90 fps; composite worked in all three. (F12 save-and-quit was later found to fail
+  with Minecraft started from the official launcher; see the next section.)
+
+## Safe quit (0.1.0-dev, after independent review)
+- An independent test found F12 / `Save-And-Quit.bat` closing MHW **without** saving: Minecraft from the
+  official launcher runs as `javaw.exe`, which the quit script did not look for, and the virtual pad's
+  start/LB presses never reached MHW (MHW was not in front, and MHW had stopped polling XInput once
+  Minecraft and its stand-in pad were gone). The script then answered "quit without saving?" with Yes.
+- `Exit-Both.ps1`: finds `java.exe` and `javaw.exe`; brings the MHW window to the front before any pad
+  press; reconnects the virtual pad and checks in `mhw-bridge.log` that MHW polls it again.
+- MHW is closed **only when the save file was updated by the menu save**. Otherwise (MHW text language not
+  Korean, no Windows Korean OCR, no vgamepad, save file not found, menu not recognised, any error) MHW is
+  left open and `exit.log` says to save by hand.
+- READMEs: Minecraft must run in a window (F11); F12 save needs MHW in Korean, the Windows Korean OCR
+  language and ViGEmBus + vgamepad.
+- Live (3840x2160 borderless, Seliana): official-launcher Minecraft + F12, and `Save-And-Quit.bat` with
+  Minecraft closed, both logged `saved through the menu (save file updated)` and closed MHW. The
+  left-open path (save not possible) was checked in code only.
