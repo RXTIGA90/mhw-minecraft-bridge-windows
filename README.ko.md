@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.png" width="220" alt="MHW x Minecraft"></p>
+
 # Minecraft × Monster Hunter: World — Windows 패스스루 모드
 
 [English](README.md) | **한국어**

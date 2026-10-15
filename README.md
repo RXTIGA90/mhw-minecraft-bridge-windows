@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.png" width="220" alt="MHW x Minecraft"></p>
+
 # Minecraft × Monster Hunter: World — Windows Passthrough Mod
 
 **English** | [한국어](README.ko.md)
