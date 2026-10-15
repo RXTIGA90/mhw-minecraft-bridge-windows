@@ -117,3 +117,12 @@
 - Borderless full screen (`Install.ps1 -Borderless`) tested at desktop resolutions 1920x1080 (~144 fps) and
   2560x1440 (~128 fps) besides 3840x2160 (~90 fps); README now recommends it. TNT crater checked again in
   Seliana: 93 blocks dug, MHW ground cut out on screen, Steve walked down into the hole (3-4 blocks deep).
+
+## No virtual pad needed (0.1.0-dev)
+- Found on a "plain user" run (no ViGEmBus/Python pad): MHW stops reading XInput once no pad is connected,
+  so Minecraft's R/V/M did nothing. The DLL now posts a device-change message to MHW while Minecraft runs and
+  MHW isn't polling; MHW then finds the DLL's stand-in pad on slot 0 (`padinject_watchdog`). Verified with no
+  virtual pad: M opened the MHW map.
+- F12: MHW is saved first (while Minecraft still runs, so the stand-in pad is there) and Minecraft quits last.
+  Verified with no virtual pad: saved through the menu, MHW closed, Minecraft saved and closed. The save
+  question match tolerates one misread syllable. ViGEmBus/vgamepad are now optional (README).
