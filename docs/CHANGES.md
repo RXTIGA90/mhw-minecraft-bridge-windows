@@ -139,3 +139,6 @@
   focus), MHW's window is restored without taking the focus. Quit script nudges MHW to re-scan pads first.
 - Tested on the developer PC with the official (Microsoft Store) launcher: Setup -> Play.bat -> hub -> profile
   "MHW Bridge" -> composited -> F12 saved MHW through the menu and closed both games.
+
+## Icon
+- Project icon (`assets\`): desktop shortcut "MHW Bridge Play" made by Setup.bat (removed by Uninstall.bat), the launcher profile icon, the mod's icon in Minecraft, and the README logo.
