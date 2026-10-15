@@ -126,3 +126,16 @@
 - F12: MHW is saved first (while Minecraft still runs, so the stand-in pad is there) and Minecraft quits last.
   Verified with no virtual pad: saved through the menu, MHW closed, Minecraft saved and closed. The save
   question match tolerates one misread syllable. ViGEmBus/vgamepad are now optional (README).
+
+## One-click setup (0.1.0-dev)
+- `Setup.bat` (tools/Setup.ps1): MHW side (`Install.ps1 -Borderless`), latest stable Fabric Loader for 1.21.1
+  (version file from meta.fabricmc.net, like the Fabric installer), Fabric API for 1.21.1 (Modrinth, SHA-512
+  checked), this mod, first-run options (window, render distance 12, Windows language) in
+  `%APPDATA%\.minecraft\mhw-bridge`, and a launcher profile "MHW Bridge" using that folder (launcher_profiles.json
+  backed up; other profiles untouched). A folder outside `.minecraft` looked empty to the Microsoft Store
+  launcher (no mods loaded), hence the subfolder.
+- `Play.bat` starts MHW and the F12 watcher; `Uninstall.bat` also removes the launcher profile.
+- DLL: when Minecraft attaches while borderless MHW is minimized (it minimizes when the launcher takes the
+  focus), MHW's window is restored without taking the focus. Quit script nudges MHW to re-scan pads first.
+- Tested on the developer PC with the official (Microsoft Store) launcher: Setup -> Play.bat -> hub -> profile
+  "MHW Bridge" -> composited -> F12 saved MHW through the menu and closed both games.
