@@ -10,8 +10,7 @@
 ## Quick start
 1. Download `mhw-minecraft-bridge-windows-0.1.0-dev.zip` from **[Releases](../../releases)** and unzip it.
 2. Back up your MHW save folder.
-3. Install the prerequisites: Minecraft Java 1.21.1 + Fabric Loader + Fabric API, and (for the R/V/M keys and the F12 save)
-   the ViGEmBus driver + Python + `pip install vgamepad`.
+3. Install the prerequisites: Minecraft Java 1.21.1 + Fabric Loader + Fabric API. Nothing else is needed (no controller or driver).
 4. With MHW closed, run `powershell -ExecutionPolicy Bypass -File Install.ps1` in the unzipped folder (add `-Borderless` for full screen, recommended).
 5. Put the jar from `bin\minecraft-mod\` into your Fabric profile's `mods` folder.
 6. Put Steam in **offline mode** → start MHW → run `Start-Session.bat` → enter the hub offline → start Minecraft (Fabric)
@@ -36,8 +35,9 @@ Based on [justbustin/minecraft-crossover-bridge](https://github.com/justbustin/m
   image sent scaled down and stretched back by MHW
 - In-game texts follow Minecraft's language setting (English and Korean included)
 - Minecraft in a **window**, not full screen (F11 toggles it; full-screen Minecraft is not composited into MHW)
-- For the R/V/M keys below without a controller **and for the F12 save**: the [ViGEmBus](https://github.com/nefarius/ViGEmBus/releases)
-  driver (no longer developed, but the last release works) and Python + `pip install vgamepad`
+- No controller or extra driver: while Minecraft runs, the mod gives MHW a built-in stand-in pad for the R/V/M keys and the F12 save.
+  Optional: the [ViGEmBus](https://github.com/nefarius/ViGEmBus/releases) driver + Python + `pip install vgamepad` lets
+  `Save-And-Quit.bat` save MHW even when Minecraft is not running
 - For the F12 save only: MHW's text language set to **Korean** and the Korean language (with its OCR part) added in Windows
   (Settings → Time & language → Language & region). Without these, save MHW by hand (see "Play" step 5)
 
@@ -61,7 +61,7 @@ Based on [justbustin/minecraft-crossover-bridge](https://github.com/justbustin/m
 
 ## Play
 0. Put Steam in **offline mode** (Steam menu → Go Offline). Online, MHW shows the "Join a session" menu after character select.
-1. Start MHW and run `Start-Session.bat` (virtual pad + F12 quit watcher; keep its window open).
+1. Start MHW and run `Start-Session.bat` (F12 quit watcher; keep its window open. A warning about a missing virtual pad is fine).
 2. Enter the hub or a field **offline** in MHW. (No online play / SOS: this mod changes monster HP.)
 3. Start Minecraft (Fabric 1.21.1). If MHW covers the whole screen, Alt+Tab to the launcher. The "MHW Bridge" world opens automatically and the Minecraft window sits on top of MHW and takes the input.
    Minecraft must run **in a window**: if it opens full screen, press F11 (full-screen Minecraft shows up as a separate screen, not inside MHW).
@@ -69,7 +69,7 @@ Based on [justbustin/minecraft-crossover-bridge](https://github.com/justbustin/m
 5. To finish press **F12** in Minecraft (or run `Save-And-Quit.bat`): saves the Minecraft world → brings MHW to the front and saves it
    through its system menu → closes MHW. The mod stays installed; next time start again from step 1. Nothing ever rolls your saves back.
    - The MHW save reads the menu on screen, so it **only works with MHW's text language set to Korean**, the Windows Korean OCR
-     language installed, and the virtual pad (ViGEmBus + vgamepad). Don't touch the mouse or keyboard while it runs.
+     language installed (included in Korean Windows). Don't touch the mouse or keyboard while it runs.
    - **MHW is only closed after the save file was actually updated.** If the save can't be done (other language, no OCR/pad, in a field
      or quest, loading screen), Minecraft still quits but MHW stays open: save by hand (start menu → System → Save) and quit MHW
      yourself. `%TEMP%\mhwmc\exit.log` says what happened (`saved through the menu (save file updated)` on success).
@@ -93,7 +93,7 @@ Menu mode (V/M) ends with V or M again, or with a **mouse click**. Switching win
 
 Everything else is normal Minecraft. Travel between areas through the MHW map with V/M.
 
-**If M/V/R do nothing in MHW:** keep `Start-Session.bat` running (MHW only reads pads while one is connected), keep the mouse off
+**If M/V/R do nothing in MHW:** wait a few seconds after Minecraft attaches (the mod then wakes up MHW's pad input), keep the mouse off
 the MHW window (MHW switches to keyboard prompts and may ignore the pad), and have only one controller connected.
 
 ## Where things are saved
