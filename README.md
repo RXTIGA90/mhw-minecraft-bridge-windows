@@ -7,19 +7,17 @@
 > - Offline only. Do not use it online or with SOS flares.
 > - If something goes wrong, restore everything with `Uninstall.ps1` and let us know (GitHub Issues).
 
-## Quick start
-1. Download `mhw-minecraft-bridge-windows-0.1.0-dev.zip` from **[Releases](../../releases)** and unzip it.
-2. Back up your MHW save folder.
-3. Install the prerequisites: Minecraft Java 1.21.1 + Fabric Loader + Fabric API. Nothing else is needed (no controller or driver).
-4. With MHW closed, run `powershell -ExecutionPolicy Bypass -File Install.ps1` in the unzipped folder (add `-Borderless` for full screen, recommended).
-5. Put the jar from `bin\minecraft-mod\` into your Fabric profile's `mods` folder.
-6. Put Steam in **offline mode** → start MHW → run `Start-Session.bat` → enter the hub offline → start Minecraft (Fabric)
-   **in a window** (press F11 if Minecraft opens full screen: full-screen Minecraft is not drawn inside MHW).
-7. To finish, press **F12** in Minecraft while in the hub (saves both games and quits; needs MHW in Korean, see "Play" step 5).
-   Uninstall with `Uninstall.ps1`.
+## Quick start (3 steps)
+1. Download `mhw-minecraft-bridge-windows-0.1.0-dev.zip` from **[Releases](../../releases)**, unzip it, and back up your
+   MHW save folder (Steam `userdata\<account>\582010\remote`).
+2. Close MHW and the Minecraft Launcher, then double-click **`Setup.bat`**. It installs everything:
+   the MHW side (borderless full screen), Fabric for Minecraft 1.21.1, Fabric API, this mod, and a launcher profile
+   **"MHW Bridge"** with its own folder (your other Minecraft worlds and mods are not touched).
+   You only need Monster Hunter: World (Steam) and Minecraft Java Edition (official launcher, logged in once). No controller or driver.
+3. To play: put Steam in **offline mode** → double-click **`Play.bat`** (starts MHW) → enter the hub offline →
+   in the Minecraft Launcher choose **"MHW Bridge"** → Play. Finish with **F12** in Minecraft while in the hub.
 
-Details below.
-
+To remove everything: **`Uninstall.bat`**. Details below.
 ## What it is
 Play real Minecraft 1.21.1 (Fabric) inside Monster Hunter: World (PC, offline). Minecraft's image is composited into
 MHW's frame (blocks behind MHW terrain and characters are hidden), and Steve walks on MHW's terrain, builds, and fights
@@ -42,28 +40,26 @@ Based on [justbustin/minecraft-crossover-bridge](https://github.com/justbustin/m
   (Settings → Time & language → Language & region). Without these, save MHW by hand (see "Play" step 5)
 
 ## Install
-1. Close MHW and run in this folder:
-   ```
-   powershell -ExecutionPolicy Bypass -File Install.ps1
-   ```
-   If the MHW folder isn't found, pass `-GameDir "D:\...\Monster Hunter World"`; pick a size with `-Resolution 1920x1080`.
-   **Recommended: `-Borderless`** (borderless full screen at your desktop resolution; tested at 1920x1080, 2560x1440 and 3840x2160).
-   The installer copies `dinput8.dll` and `mhwbridge\`, backs up `graphics_option.ini`, then sets DirectX 11, window mode and the
-   chosen size. It stops if another `dinput8.dll` mod loader (e.g. Stracker's Loader) is present.
-   Start MHW once before installing (it creates `graphics_option.ini`, which the installer needs).
-   If you installed with `-GameDir`, uninstall with the same `-GameDir`.
-2. Minecraft side (Fabric):
-   1. Run the [Fabric installer](https://fabricmc.net/use/installer/) → Client → Minecraft **1.21.1** → Install. The official
-      launcher now has a **fabric-loader-1.21.1** profile.
-   2. Put `bin\minecraft-mod\mhw-bridge-0.1.0-windows.jar` and [Fabric API](https://modrinth.com/mod/fabric-api) (1.21.1 build)
-      into `%APPDATA%\.minecraft\mods` (create the folder if missing).
-   3. Start that profile once. The launcher warns that the installation is modded: choose **Play**.
+Run **`Setup.bat`** (MHW and the Minecraft Launcher closed). What it does:
+1. MHW side (`Install.ps1 -Borderless`): copies `dinput8.dll` and `mhwbridge\`, backs up `graphics_option.ini`, sets
+   DirectX 11 and borderless full screen at your desktop resolution. It stops if another `dinput8.dll` mod loader
+   (e.g. Stracker's Loader) is present, or if MHW was never started (start and close it once first).
+   A window instead: `Setup.bat -Window` (2560x1440 window). Other MHW folder: `Setup.bat -GameDir "D:\...\Monster Hunter World"`.
+2. Minecraft side: the latest Fabric Loader for 1.21.1 (from meta.fabricmc.net), Fabric API for 1.21.1 (from Modrinth,
+   hash checked) and this mod go into `%APPDATA%\.minecraft\mhw-bridge`, with first-run settings (window mode, render
+   distance 12, your Windows language). A launcher profile "MHW Bridge" points there. The launcher's profile file is
+   backed up first (`launcher_profiles.json.mhwbridge-backup`).
 
+Running `Setup.bat` again is safe (it updates the same files).
+
+Manual install (instead of Setup.bat): `Install.ps1 [-Borderless]`, then the [Fabric installer](https://fabricmc.net/use/installer/)
+for Minecraft **1.21.1**, and `bin\minecraft-mod\mhw-bridge-0.1.0-windows.jar` + [Fabric API](https://modrinth.com/mod/fabric-api)
+(the `...+1.21.1` file) into the Fabric profile's `mods` folder.
 ## Play
 0. Put Steam in **offline mode** (Steam menu → Go Offline). Online, MHW shows the "Join a session" menu after character select.
-1. Start MHW and run `Start-Session.bat` (F12 quit watcher; keep its window open. A warning about a missing virtual pad is fine).
+1. Run `Play.bat`: it starts MHW and the F12 quit watcher (keep its window open; a note about a missing virtual pad is fine).
 2. Enter the hub or a field **offline** in MHW. (No online play / SOS: this mod changes monster HP.)
-3. Start Minecraft (Fabric 1.21.1). If MHW covers the whole screen, Alt+Tab to the launcher. The "MHW Bridge" world opens automatically and the Minecraft window sits on top of MHW and takes the input.
+3. In the Minecraft Launcher pick the profile **"MHW Bridge"** and press Play (confirm the "modded" warning). If MHW covers the whole screen, Alt+Tab to the launcher. The "MHW Bridge" world opens automatically and the Minecraft window sits on top of MHW and takes the input.
    Minecraft must run **in a window**: if it opens full screen, press F11 (full-screen Minecraft shows up as a separate screen, not inside MHW).
 4. Going to a field: M (map) → F (world map) → Q/E (low/high rank) → WASD (region) → Enter.
 5. To finish press **F12** in Minecraft (or run `Save-And-Quit.bat`): saves the Minecraft world → brings MHW to the front and saves it
@@ -86,7 +82,7 @@ Based on [justbustin/minecraft-crossover-bridge](https://github.com/justbustin/m
 | F8 | Hand keyboard and mouse to the hunter (F8 in the MHW window to come back) |
 | F9 | Debug view (state, hitboxes, HP) |
 | F10 | Hunter stand-in on/off (a hidden hunter under Steve takes MHW's attacks for him) |
-| F12 | Save both games and quit (while `Start-Session.bat` runs) |
+| F12 | Save both games and quit (while the `Play.bat` window is open) |
 | F4 | Settings: ledge guard, arrow assist, blast assist, mobs vs monsters, explosion craters, [experimental] monsters blocked by buildings (off by default). Each on/off, saved in `config\mhwbridge.properties` |
 
 Menu mode (V/M) ends with V or M again, or with a **mouse click**. Switching windows (Alt+Tab) releases any held keys.
@@ -110,11 +106,9 @@ the MHW window (MHW switches to keyboard prompts and may ignore the pad), and ha
   and with projectiles (fireballs, breath). Standing next to a monster does no harm. Bites and tail swipes in place don't reach mobs yet
 
 ## Uninstall
-```
-powershell -ExecutionPolicy Bypass -File Uninstall.ps1
-```
-Removes the mod files from the game folder and restores the graphics settings. Delete the jar from Minecraft's `mods` yourself.
-
+Double-click **`Uninstall.bat`**: removes the mod files from the game folder, restores the graphics settings and removes the
+"MHW Bridge" launcher profile. The Minecraft folder `%APPDATA%\.minecraft\mhw-bridge` (its world and settings) is kept;
+delete it yourself if you like.
 ## Known limits
 - MHW monsters and the hunter don't see craters and keep walking on the original ground (engine limit).
 - Terrain is approximated in whole blocks, so slopes and steps snap to one-block steps.
@@ -129,9 +123,10 @@ Removes the mod files from the game folder and restores the graphics settings. D
 - **Back up your saves.** The mod changes game state such as monster HP.
 
 ## Folder layout
+- `Setup.bat` one-click install, `Play.bat` start a session, `Uninstall.bat` remove everything, `Save-And-Quit.bat` same as F12
 - `bin\` binaries (MHW DLLs, Minecraft mod jar)
 - `source\` full source (mhw-bridge: C++/MinHook, mc-bridge: Fabric mod)
-- `tools\` virtual pad, session/quit scripts, core build script
+- `tools\` setup/session/quit scripts, optional virtual pad, core build script
 - `docs\CHANGES.md` changes compared with the original
 
 ## License

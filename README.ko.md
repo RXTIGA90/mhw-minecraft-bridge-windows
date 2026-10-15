@@ -7,18 +7,17 @@
 > - 오프라인 전용입니다. 온라인·구조 신호에서 쓰지 마세요.
 > - 문제가 생기면 `Uninstall.ps1`로 원래대로 되돌리고 알려 주세요(GitHub Issues).
 
-## 빠른 시작 (요약)
-1. **[Releases](../../releases)** 에서 `mhw-minecraft-bridge-windows-0.1.0-dev.zip`을 받아 압축을 풉니다.
-2. 몬헌 세이브 폴더를 백업합니다.
-3. 준비물 설치: Minecraft Java 1.21.1 + Fabric Loader + Fabric API. 그 밖에는 필요 없습니다(컨트롤러·드라이버 불필요).
-4. 몬헌을 끈 상태에서 압축 푼 폴더에서 `powershell -ExecutionPolicy Bypass -File Install.ps1` 실행 (전체 화면은 끝에 `-Borderless`, 권장).
-5. `bin\minecraft-mod\` 의 jar를 Fabric 프로필 `mods` 폴더에 넣습니다.
-6. Steam을 **오프라인 모드**로 → 몬헌 실행 → `Start-Session.bat` 실행 → 오프라인으로 거점 입장 → Minecraft(Fabric) 실행.
-   마크는 **창 모드**여야 합니다(전체 화면으로 뜨면 F11. 전체 화면이면 몬헌 안에 그려지지 않습니다).
-7. 끝낼 때는 거점에서 마크의 **F12** (두 게임 저장 후 종료, 몬헌이 한국어여야 함: 아래 "플레이" 5번). 제거는 `Uninstall.ps1`.
+## 빠른 시작 (3단계)
+1. **[Releases](../../releases)** 에서 `mhw-minecraft-bridge-windows-0.1.0-dev.zip`을 받아 압축을 풀고, 몬헌 세이브 폴더
+   (Steam `userdata\<계정>\582010\remote`)를 백업합니다.
+2. 몬헌과 마인크래프트 런처를 끈 상태에서 **`Setup.bat`** 을 더블클릭합니다. 전부 자동으로 설치됩니다:
+   몬헌 쪽(테두리 없는 전체 화면), 마크 1.21.1용 Fabric, Fabric API, 이 모드, 그리고 전용 폴더를 쓰는 런처 프로필
+   **"MHW Bridge"** (다른 마크 월드·모드는 건드리지 않음).
+   필요한 건 몬헌(Steam)과 마인크래프트 자바 에디션(공식 런처, 한 번 로그인)뿐입니다. 컨트롤러·드라이버 불필요.
+3. 플레이: Steam을 **오프라인 모드**로 → **`Play.bat`** 더블클릭(몬헌 실행) → 몬헌에서 오프라인으로 거점 입장 →
+   마크 런처에서 **"MHW Bridge"** 선택 → 플레이. 끝낼 때는 거점에서 마크의 **F12**.
 
-자세한 내용은 아래에 있습니다.
-
+전부 지우려면 **`Uninstall.bat`**. 자세한 내용은 아래에 있습니다.
 ## 소개
 실제 Minecraft 1.21.1(Fabric)을 Monster Hunter: World(PC, 오프라인) 안에서 플레이하는 모드입니다.
 Minecraft 화면이 몬헌 화면 안에 합성되고(몬헌 지형·캐릭터 뒤의 블록은 가려짐), 스티브가 몬헌 지형 위를
@@ -40,28 +39,24 @@ Minecraft 화면이 몬헌 화면 안에 합성되고(몬헌 지형·캐릭터 �
   (설정 → 시간 및 언어 → 언어 및 지역). 없으면 몬헌은 직접 저장하세요(아래 "플레이" 5번)
 
 ## 설치
-1. 몬헌을 끄고, 이 폴더에서 실행:
-   ```
-   powershell -ExecutionPolicy Bypass -File Install.ps1
-   ```
-   몬헌 폴더를 못 찾으면 `-GameDir "D:\...\Monster Hunter World"`, 해상도는 `-Resolution 1920x1080`처럼 지정.
-   **권장: `-Borderless`** (바탕화면 해상도 그대로 테두리 없는 전체 화면. 1920x1080·2560x1440·3840x2160에서 시험함).
-   설치기는 `dinput8.dll`, `mhwbridge\`를 복사하고, `graphics_option.ini`를 백업한 뒤 DirectX 11 · 창 모드 · 지정 해상도로 바꿉니다.
-   다른 `dinput8.dll` 모드 로더(예: Stracker's Loader)가 있으면 설치를 멈춥니다.
-   설치 전에 몬헌을 한 번 실행해 두세요(설치기에 필요한 `graphics_option.ini`가 그때 만들어집니다).
-   `-GameDir`로 설치했다면 제거할 때도 같은 `-GameDir`을 붙이세요.
-2. Minecraft 쪽(Fabric):
-   1. [Fabric 설치기](https://fabricmc.net/use/installer/) 실행 → Client → Minecraft **1.21.1** → Install. 공식 런처에
-      **fabric-loader-1.21.1** 프로필이 생깁니다.
-   2. `bin\minecraft-mod\mhw-bridge-0.1.0-windows.jar`와 [Fabric API](https://modrinth.com/mod/fabric-api)(1.21.1용)를
-      `%APPDATA%\.minecraft\mods`에 넣습니다(폴더가 없으면 만들기).
-   3. 그 프로필로 한 번 실행합니다. 런처가 "모드가 설치된 버전" 경고를 띄우면 **플레이**를 누르세요.
+몬헌과 마크 런처를 끈 상태에서 **`Setup.bat`** 을 실행합니다. 하는 일:
+1. 몬헌 쪽(`Install.ps1 -Borderless`): `dinput8.dll`, `mhwbridge\`를 복사하고 `graphics_option.ini`를 백업한 뒤
+   DirectX 11 · 바탕화면 해상도의 테두리 없는 전체 화면으로 바꿉니다. 다른 `dinput8.dll` 모드 로더(예: Stracker's Loader)가
+   있거나 몬헌을 한 번도 실행하지 않았으면 멈춥니다(몬헌을 한 번 켰다 끄고 다시 실행).
+   창 모드로 하려면 `Setup.bat -Window`(2560x1440 창). 몬헌 폴더 지정: `Setup.bat -GameDir "D:\...\Monster Hunter World"`.
+2. 마크 쪽: 1.21.1용 최신 Fabric 로더(meta.fabricmc.net), 1.21.1용 Fabric API(Modrinth, 해시 확인), 이 모드를
+   `%APPDATA%\.minecraft\mhw-bridge`에 넣고 첫 설정(창 모드, 렌더 거리 12, Windows 언어)을 만듭니다. 런처 프로필
+   "MHW Bridge"가 이 폴더를 씁니다. 런처 프로필 파일은 먼저 백업합니다(`launcher_profiles.json.mhwbridge-backup`).
 
+`Setup.bat`은 다시 실행해도 안전합니다(같은 파일을 갱신).
+
+직접 설치(Setup.bat 대신): `Install.ps1 [-Borderless]` → [Fabric 설치기](https://fabricmc.net/use/installer/)로 마크 **1.21.1** 설치 →
+`bin\minecraft-mod\mhw-bridge-0.1.0-windows.jar`와 [Fabric API](https://modrinth.com/mod/fabric-api)(`...+1.21.1` 파일)를 Fabric 프로필의 `mods`에 넣기.
 ## 플레이
 0. Steam을 **오프라인 모드**로 둡니다(Steam 메뉴 → 오프라인으로 전환). 온라인이면 캐릭터 선택 뒤 "집회구역 이동" 메뉴가 뜹니다.
-1. 몬헌을 실행하고 `Start-Session.bat`을 켭니다(F12 종료 대기, 창은 열어 두기. 가상 패드가 없다는 경고는 무시해도 됩니다).
+1. `Play.bat`을 실행합니다: 몬헌과 F12 종료 대기 창이 켜집니다(창은 열어 두기. 가상 패드가 없다는 안내는 무시해도 됩니다).
 2. 몬헌에서 **오프라인**으로 거점이나 필드에 들어갑니다. (온라인/구조 신호 사용 금지: 몬스터 체력을 바꾸는 모드입니다)
-3. Minecraft(Fabric 1.21.1)를 실행합니다(몬헌이 화면을 덮고 있으면 Alt+Tab으로 런처로 가세요). 자동으로 "MHW Bridge" 월드가 열리고, 마크 창이 몬헌 창 위에 붙어 조작을 받습니다.
+3. 마크 런처에서 프로필 **"MHW Bridge"** 를 골라 플레이합니다("모드" 경고가 나오면 플레이)(몬헌이 화면을 덮고 있으면 Alt+Tab으로 런처로 가세요). 자동으로 "MHW Bridge" 월드가 열리고, 마크 창이 몬헌 창 위에 붙어 조작을 받습니다.
    마크는 **창 모드**로 실행해야 합니다. 전체 화면으로 뜨면 F11을 누르세요(전체 화면이면 몬헌 안이 아니라 따로 보입니다).
 4. 필드로 가기: M(지도) → F(전역 맵) → Q/E(하위·상위) → WASD(지역) → Enter.
 5. 끝낼 때는 마크에서 **F12**(또는 `Save-And-Quit.bat`): 마크 월드 저장 → 몬헌 창을 앞으로 가져와 시스템 메뉴로 저장 → 몬헌 종료.
@@ -81,7 +76,7 @@ Minecraft 화면이 몬헌 화면 안에 합성되고(몬헌 지형·캐릭터 �
 | F8 | 키보드·마우스를 헌터에게 넘김(몬헌 창에서 F8로 복귀) |
 | F9 | 디버그 표시(상태, 판정 상자, 체력) |
 | F10 | 헌터 대역 켜기/끄기(스티브 발밑에 숨은 헌터가 몬헌 공격을 대신 받음) |
-| F12 | 두 게임 저장 후 종료(`Start-Session.bat`이 켜져 있을 때) |
+| F12 | 두 게임 저장 후 종료(`Play.bat` 창이 열려 있을 때) |
 | F4 | 설정: 낭떠러지 보호, 화살 보정, 폭발 보정, 몹 vs 몬스터, 폭발 구덩이, [실험] 몬스터가 건축물에 막힘(기본 끔) (각각 켜기/끄기, `config\mhwbridge.properties`에 저장) |
 
 메뉴 모드(V/M)는 V·M을 다시 누르거나 **마우스 클릭**으로 끝납니다. 창을 바꾸면(Alt+Tab) 누르던 키는 자동으로 풀립니다.
@@ -103,11 +98,8 @@ Minecraft 화면이 몬헌 화면 안에 합성되고(몬헌 지형·캐릭터 �
 - 마크 적대 몹이 근처 몬헌 몬스터를 공격. 몬헌 몬스터는 돌진·몸통박치기(빠르게 움직일 때)와 투사체로 마크 몹에 피해를 줌. 그냥 옆에 서 있으면 피해 없음. 제자리 물기·꼬리 휘두르기는 아직 몹에 전달되지 않음
 
 ## 제거
-```
-powershell -ExecutionPolicy Bypass -File Uninstall.ps1
-```
-게임 폴더의 모드 파일을 지우고 그래픽 설정을 되돌립니다. Minecraft `mods`의 jar는 직접 지우세요.
-
+**`Uninstall.bat`** 더블클릭: 게임 폴더의 모드 파일 삭제, 그래픽 설정 복원, 런처 프로필 "MHW Bridge" 삭제.
+마크 폴더 `%APPDATA%\.minecraft\mhw-bridge`(월드·설정)는 남겨 둡니다. 필요 없으면 직접 지우세요.
 ## 알려진 한계
 - 몬헌 몬스터와 헌터는 구덩이를 인식하지 못하고 원래 땅 위를 걷습니다(엔진 한계).
 - 지형은 블록 단위 근사라 경사·턱이 1블록 단위로 맞춰집니다.
@@ -117,9 +109,10 @@ powershell -ExecutionPolicy Bypass -File Uninstall.ps1
 - **세이브는 미리 백업하세요.** 모드가 몬스터 체력 등 게임 상태를 바꿉니다.
 
 ## 폴더 구성
+- `Setup.bat` 원클릭 설치, `Play.bat` 플레이 시작, `Uninstall.bat` 전부 제거, `Save-And-Quit.bat` F12와 같음
 - `bin\` 실행 파일(몬헌용 DLL, 마크 모드 jar)
 - `source\` 전체 소스(mhw-bridge: C++/MinHook, mc-bridge: Fabric 모드)
-- `tools\` 가상 패드, 세션/종료 스크립트, 코어 빌드 스크립트
+- `tools\` 설치·세션·종료 스크립트, 선택용 가상 패드, 코어 빌드 스크립트
 - `docs\CHANGES.md` 원본 대비 변경 내역
 
 
