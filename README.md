@@ -50,13 +50,20 @@ Based on [justbustin/minecraft-crossover-bridge](https://github.com/justbustin/m
    For full screen on a 4K monitor use `-Borderless` (borderless window at the desktop size).
    The installer copies `dinput8.dll` and `mhwbridge\`, backs up `graphics_option.ini`, then sets DirectX 11, window mode and the
    chosen size. It stops if another `dinput8.dll` mod loader (e.g. Stracker's Loader) is present.
-2. Minecraft side: put `bin\minecraft-mod\mhw-bridge-0.1.0-windows.jar` and Fabric API into your Fabric profile's `mods` folder.
+   Start MHW once before installing (it creates `graphics_option.ini`, which the installer needs).
+   If you installed with `-GameDir`, uninstall with the same `-GameDir`.
+2. Minecraft side (Fabric):
+   1. Run the [Fabric installer](https://fabricmc.net/use/installer/) → Client → Minecraft **1.21.1** → Install. The official
+      launcher now has a **fabric-loader-1.21.1** profile.
+   2. Put `bin\minecraft-mod\mhw-bridge-0.1.0-windows.jar` and [Fabric API](https://modrinth.com/mod/fabric-api) (1.21.1 build)
+      into `%APPDATA%\.minecraft\mods` (create the folder if missing).
+   3. Start that profile once. The launcher warns that the installation is modded: choose **Play**.
 
 ## Play
 0. Put Steam in **offline mode** (Steam menu → Go Offline). Online, MHW shows the "Join a session" menu after character select.
 1. Start MHW and run `Start-Session.bat` (virtual pad + F12 quit watcher; keep its window open).
 2. Enter the hub or a field **offline** in MHW. (No online play / SOS: this mod changes monster HP.)
-3. Start Minecraft (Fabric 1.21.1). The "MHW Bridge" world opens automatically and the Minecraft window sits on top of MHW and takes the input.
+3. Start Minecraft (Fabric 1.21.1). If MHW covers the whole screen, Alt+Tab to the launcher. The "MHW Bridge" world opens automatically and the Minecraft window sits on top of MHW and takes the input.
    Minecraft must run **in a window**: if it opens full screen, press F11 (full-screen Minecraft shows up as a separate screen, not inside MHW).
 4. Going to a field: M (map) → F (world map) → Q/E (low/high rank) → WASD (region) → Enter.
 5. To finish press **F12** in Minecraft (or run `Save-And-Quit.bat`): saves the Minecraft world → brings MHW to the front and saves it
@@ -86,6 +93,9 @@ Menu mode (V/M) ends with V or M again, or with a **mouse click**. Switching win
 
 Everything else is normal Minecraft. Travel between areas through the MHW map with V/M.
 
+**If M/V/R do nothing in MHW:** keep `Start-Session.bat` running (MHW only reads pads while one is connected), keep the mouse off
+the MHW window (MHW switches to keyboard prompts and may ignore the pad), and have only one controller connected.
+
 ## Where things are saved
 - Minecraft world: `saves\mhw-bridge` in the Fabric profile (includes the crater list `mhwbridge-craters.txt` and area anchors)
 - MHW saves: Steam `userdata\<account>\582010\remote` (synced by Steam Cloud)
@@ -109,7 +119,9 @@ Removes the mod files from the game folder and restores the graphics settings. D
 - MHW monsters and the hunter don't see craters and keep walking on the original ground (engine limit).
 - Terrain is approximated in whole blocks, so slopes and steps snap to one-block steps.
 - At 4K (3840x2160, `-Borderless`) Minecraft's image is sent at 2560x1440 and stretched (MHW itself stays 4K).
-  Measured in Seliana: 4K about 85–90 fps, 1440p window about 120 fps, compositing 2.2–2.4 ms per frame.
+  Measured in Seliana on the developer PC with Minecraft's render distance 12: 1080p window ~144 fps, 1440p window
+  ~120–127 fps, 4K ~90 fps, compositing 1–2.4 ms per frame. Another test with render distance 32 got about 60–65 fps at
+  1440p and 4K: lower Minecraft's render distance (Video Settings) if MHW feels slow.
 - [Experimental, unreliable] Monsters blocked by buildings (off by default): MHW's collision and pathfinding don't know Minecraft blocks,
   so a monster is pushed back the moment it moves into built blocks. In tests monsters were held briefly but often broke through
   in the end. It is inactive for 5 s after an area change and while Minecraft restarts.
