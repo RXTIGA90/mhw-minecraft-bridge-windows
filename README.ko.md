@@ -11,7 +11,7 @@
 1. **[Releases](../../releases)** 에서 `mhw-minecraft-bridge-windows-0.1.0-dev.zip`을 받아 압축을 풉니다.
 2. 몬헌 세이브 폴더를 백업합니다.
 3. 준비물 설치: Minecraft Java 1.21.1 + Fabric Loader + Fabric API, (R/V/M 키와 F12 저장에 필요) ViGEmBus 드라이버 + Python + `pip install vgamepad`.
-4. 몬헌을 끈 상태에서 압축 푼 폴더에서 `powershell -ExecutionPolicy Bypass -File Install.ps1` 실행 (4K 전체 화면은 끝에 `-Borderless`).
+4. 몬헌을 끈 상태에서 압축 푼 폴더에서 `powershell -ExecutionPolicy Bypass -File Install.ps1` 실행 (전체 화면은 끝에 `-Borderless`, 권장).
 5. `bin\minecraft-mod\` 의 jar를 Fabric 프로필 `mods` 폴더에 넣습니다.
 6. Steam을 **오프라인 모드**로 → 몬헌 실행 → `Start-Session.bat` 실행 → 오프라인으로 거점 입장 → Minecraft(Fabric) 실행.
    마크는 **창 모드**여야 합니다(전체 화면으로 뜨면 F11. 전체 화면이면 몬헌 안에 그려지지 않습니다).
@@ -44,7 +44,7 @@ Minecraft 화면이 몬헌 화면 안에 합성되고(몬헌 지형·캐릭터 �
    powershell -ExecutionPolicy Bypass -File Install.ps1
    ```
    몬헌 폴더를 못 찾으면 `-GameDir "D:\...\Monster Hunter World"`, 해상도는 `-Resolution 1920x1080`처럼 지정.
-   4K 모니터 전체 화면으로 하려면 `-Borderless` (바탕화면 해상도의 테두리 없는 창).
+   **권장: `-Borderless`** (바탕화면 해상도 그대로 테두리 없는 전체 화면. 1920x1080·2560x1440·3840x2160에서 시험함).
    설치기는 `dinput8.dll`, `mhwbridge\`를 복사하고, `graphics_option.ini`를 백업한 뒤 DirectX 11 · 창 모드 · 지정 해상도로 바꿉니다.
    다른 `dinput8.dll` 모드 로더(예: Stracker's Loader)가 있으면 설치를 멈춥니다.
    설치 전에 몬헌을 한 번 실행해 두세요(설치기에 필요한 `graphics_option.ini`가 그때 만들어집니다).

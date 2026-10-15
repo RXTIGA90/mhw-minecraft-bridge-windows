@@ -12,7 +12,7 @@
 2. Back up your MHW save folder.
 3. Install the prerequisites: Minecraft Java 1.21.1 + Fabric Loader + Fabric API, and (for the R/V/M keys and the F12 save)
    the ViGEmBus driver + Python + `pip install vgamepad`.
-4. With MHW closed, run `powershell -ExecutionPolicy Bypass -File Install.ps1` in the unzipped folder (add `-Borderless` for 4K full screen).
+4. With MHW closed, run `powershell -ExecutionPolicy Bypass -File Install.ps1` in the unzipped folder (add `-Borderless` for full screen, recommended).
 5. Put the jar from `bin\minecraft-mod\` into your Fabric profile's `mods` folder.
 6. Put Steam in **offline mode** → start MHW → run `Start-Session.bat` → enter the hub offline → start Minecraft (Fabric)
    **in a window** (press F11 if Minecraft opens full screen: full-screen Minecraft is not drawn inside MHW).
@@ -47,7 +47,7 @@ Based on [justbustin/minecraft-crossover-bridge](https://github.com/justbustin/m
    powershell -ExecutionPolicy Bypass -File Install.ps1
    ```
    If the MHW folder isn't found, pass `-GameDir "D:\...\Monster Hunter World"`; pick a size with `-Resolution 1920x1080`.
-   For full screen on a 4K monitor use `-Borderless` (borderless window at the desktop size).
+   **Recommended: `-Borderless`** (borderless full screen at your desktop resolution; tested at 1920x1080, 2560x1440 and 3840x2160).
    The installer copies `dinput8.dll` and `mhwbridge\`, backs up `graphics_option.ini`, then sets DirectX 11, window mode and the
    chosen size. It stops if another `dinput8.dll` mod loader (e.g. Stracker's Loader) is present.
    Start MHW once before installing (it creates `graphics_option.ini`, which the installer needs).
