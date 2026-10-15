@@ -10,12 +10,14 @@
 ## Quick start
 1. Download `mhw-minecraft-bridge-windows-0.1.0-dev.zip` from **[Releases](../../releases)** and unzip it.
 2. Back up your MHW save folder.
-3. Install the prerequisites: Minecraft Java 1.21.1 + Fabric Loader + Fabric API, and (to interact with MHW from the keyboard)
+3. Install the prerequisites: Minecraft Java 1.21.1 + Fabric Loader + Fabric API, and (for the R/V/M keys and the F12 save)
    the ViGEmBus driver + Python + `pip install vgamepad`.
 4. With MHW closed, run `powershell -ExecutionPolicy Bypass -File Install.ps1` in the unzipped folder (add `-Borderless` for 4K full screen).
 5. Put the jar from `bin\minecraft-mod\` into your Fabric profile's `mods` folder.
-6. Put Steam in **offline mode** → start MHW → run `Start-Session.bat` → enter the hub offline → start Minecraft (Fabric).
-7. To finish, press **F12** in Minecraft while in the hub (saves both games and quits). Uninstall with `Uninstall.ps1`.
+6. Put Steam in **offline mode** → start MHW → run `Start-Session.bat` → enter the hub offline → start Minecraft (Fabric)
+   **in a window** (press F11 if Minecraft opens full screen: full-screen Minecraft is not drawn inside MHW).
+7. To finish, press **F12** in Minecraft while in the hub (saves both games and quits; needs MHW in Korean, see "Play" step 5).
+   Uninstall with `Uninstall.ps1`.
 
 Details below.
 
@@ -33,8 +35,11 @@ Based on [justbustin/minecraft-crossover-bridge](https://github.com/justbustin/m
 - MHW in a window (default 2560x1440) or borderless full screen (4K works). Screens larger than 2560x1600 get Minecraft's
   image sent scaled down and stretched back by MHW
 - In-game texts follow Minecraft's language setting (English and Korean included)
-- Optional (for the R/V/M keys below without a controller): the [ViGEmBus](https://github.com/nefarius/ViGEmBus/releases)
-  driver and Python + `pip install vgamepad`
+- Minecraft in a **window**, not full screen (F11 toggles it; full-screen Minecraft is not composited into MHW)
+- For the R/V/M keys below without a controller **and for the F12 save**: the [ViGEmBus](https://github.com/nefarius/ViGEmBus/releases)
+  driver (no longer developed, but the last release works) and Python + `pip install vgamepad`
+- For the F12 save only: MHW's text language set to **Korean** and the Korean language (with its OCR part) added in Windows
+  (Settings → Time & language → Language & region). Without these, save MHW by hand (see "Play" step 5)
 
 ## Install
 1. Close MHW and run in this folder:
@@ -52,11 +57,16 @@ Based on [justbustin/minecraft-crossover-bridge](https://github.com/justbustin/m
 1. Start MHW and run `Start-Session.bat` (virtual pad + F12 quit watcher; keep its window open).
 2. Enter the hub or a field **offline** in MHW. (No online play / SOS: this mod changes monster HP.)
 3. Start Minecraft (Fabric 1.21.1). The "MHW Bridge" world opens automatically and the Minecraft window sits on top of MHW and takes the input.
+   Minecraft must run **in a window**: if it opens full screen, press F11 (full-screen Minecraft shows up as a separate screen, not inside MHW).
 4. Going to a field: M (map) → F (world map) → Q/E (low/high rank) → WASD (region) → Enter.
-5. To finish press **F12** in Minecraft (or run `Save-And-Quit.bat`): saves the Minecraft world → saves MHW through its system menu → closes both.
-   The mod stays installed; next time start again from step 1. Nothing ever rolls your saves back.
-   - MHW can only be saved manually in the hub. F12 in a field (expedition/quest) or during loading skips the menu save and quits;
-     MHW keeps its last autosave (when you left for / came back from the field). Press F12 in the hub to keep your progress.
+5. To finish press **F12** in Minecraft (or run `Save-And-Quit.bat`): saves the Minecraft world → brings MHW to the front and saves it
+   through its system menu → closes MHW. The mod stays installed; next time start again from step 1. Nothing ever rolls your saves back.
+   - The MHW save reads the menu on screen, so it **only works with MHW's text language set to Korean**, the Windows Korean OCR
+     language installed, and the virtual pad (ViGEmBus + vgamepad). Don't touch the mouse or keyboard while it runs.
+   - **MHW is only closed after the save file was actually updated.** If the save can't be done (other language, no OCR/pad, in a field
+     or quest, loading screen), Minecraft still quits but MHW stays open: save by hand (start menu → System → Save) and quit MHW
+     yourself. `%TEMP%\mhwmc\exit.log` says what happened (`saved through the menu (save file updated)` on success).
+   - MHW can only be saved manually in the hub, so press F12 in the hub.
    - After a crash or power loss: Minecraft keeps its last autosave (about every 5 minutes), MHW its last auto/manual save.
 
 | Key | Action |

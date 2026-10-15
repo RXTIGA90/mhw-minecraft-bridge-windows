@@ -10,11 +10,12 @@
 ## 빠른 시작 (요약)
 1. **[Releases](../../releases)** 에서 `mhw-minecraft-bridge-windows-0.1.0-dev.zip`을 받아 압축을 풉니다.
 2. 몬헌 세이브 폴더를 백업합니다.
-3. 준비물 설치: Minecraft Java 1.21.1 + Fabric Loader + Fabric API, (키보드로 몬헌 상호작용을 하려면) ViGEmBus 드라이버 + Python + `pip install vgamepad`.
+3. 준비물 설치: Minecraft Java 1.21.1 + Fabric Loader + Fabric API, (R/V/M 키와 F12 저장에 필요) ViGEmBus 드라이버 + Python + `pip install vgamepad`.
 4. 몬헌을 끈 상태에서 압축 푼 폴더에서 `powershell -ExecutionPolicy Bypass -File Install.ps1` 실행 (4K 전체 화면은 끝에 `-Borderless`).
 5. `bin\minecraft-mod\` 의 jar를 Fabric 프로필 `mods` 폴더에 넣습니다.
 6. Steam을 **오프라인 모드**로 → 몬헌 실행 → `Start-Session.bat` 실행 → 오프라인으로 거점 입장 → Minecraft(Fabric) 실행.
-7. 끝낼 때는 거점에서 마크의 **F12** (두 게임 저장 후 종료). 제거는 `Uninstall.ps1`.
+   마크는 **창 모드**여야 합니다(전체 화면으로 뜨면 F11. 전체 화면이면 몬헌 안에 그려지지 않습니다).
+7. 끝낼 때는 거점에서 마크의 **F12** (두 게임 저장 후 종료, 몬헌이 한국어여야 함: 아래 "플레이" 5번). 제거는 `Uninstall.ps1`.
 
 자세한 내용은 아래에 있습니다.
 
@@ -30,8 +31,11 @@ Minecraft 화면이 몬헌 화면 안에 합성되고(몬헌 지형·캐릭터 �
 - Minecraft Java 1.21.1, [Fabric Loader](https://fabricmc.net/use/) 0.16 이상, [Fabric API](https://modrinth.com/mod/fabric-api) 1.21.1용
 - 몬헌 창 모드(기본 2560x1440) 또는 테두리 없는 전체 화면(4K 포함). 2560x1600보다 큰 화면은 마크 화면을 줄여 보낸 뒤 몬헌이 늘려 그립니다
 - 게임 안 문구는 마인크래프트 언어 설정을 따릅니다(영어·한국어 포함)
-- 선택: 컨트롤러가 없을 때 R/V/M 키(아래)를 쓰려면 [ViGEmBus](https://github.com/nefarius/ViGEmBus/releases) 드라이버와
-  Python + `pip install vgamepad`
+- 마크는 전체 화면이 아닌 **창 모드**(F11로 전환. 전체 화면이면 몬헌 안에 합성되지 않음)
+- 컨트롤러 없이 R/V/M 키(아래)를 쓰거나 **F12 저장**을 하려면: [ViGEmBus](https://github.com/nefarius/ViGEmBus/releases) 드라이버
+  (개발은 끝났지만 마지막 릴리스로 동작)와 Python + `pip install vgamepad`
+- F12 저장에만 필요: 몬헌 텍스트 언어 **한국어**, Windows에 한국어 언어(문자 인식 OCR 포함) 설치
+  (설정 → 시간 및 언어 → 언어 및 지역). 없으면 몬헌은 직접 저장하세요(아래 "플레이" 5번)
 
 ## 설치
 1. 몬헌을 끄고, 이 폴더에서 실행:
@@ -49,10 +53,13 @@ Minecraft 화면이 몬헌 화면 안에 합성되고(몬헌 지형·캐릭터 �
 1. 몬헌을 실행하고 `Start-Session.bat`을 켭니다(가상 패드 + F12 종료 대기, 창은 열어 두기).
 2. 몬헌에서 **오프라인**으로 거점이나 필드에 들어갑니다. (온라인/구조 신호 사용 금지: 몬스터 체력을 바꾸는 모드입니다)
 3. Minecraft(Fabric 1.21.1)를 실행하면 자동으로 "MHW Bridge" 월드가 열리고, 마크 창이 몬헌 창 위에 붙어 조작을 받습니다.
+   마크는 **창 모드**로 실행해야 합니다. 전체 화면으로 뜨면 F11을 누르세요(전체 화면이면 몬헌 안이 아니라 따로 보입니다).
 4. 필드로 가기: M(지도) → F(전역 맵) → Q/E(하위·상위) → WASD(지역) → Enter.
-5. 끝낼 때는 마크에서 **F12**(또는 `Save-And-Quit.bat`): 마크 월드 저장 → 몬헌 시스템 메뉴로 저장 → 두 게임 종료.
+5. 끝낼 때는 마크에서 **F12**(또는 `Save-And-Quit.bat`): 마크 월드 저장 → 몬헌 창을 앞으로 가져와 시스템 메뉴로 저장 → 몬헌 종료.
    모드는 게임 폴더에 그대로 남아 있어서 다음에는 1번부터 다시 하면 됩니다. 세이브를 되돌리는 동작은 없습니다.
-   - 몬헌은 거점에서만 수동 저장이 됩니다. 필드(탐색·퀘스트)나 로딩 중에 F12를 누르면 메뉴 저장을 건너뛰고 종료하며, 마지막 자동 저장(필드 출발·귀환 시점)까지 남습니다. 진행을 남기려면 거점에서 F12를 누르세요.
+   - 몬헌 저장은 화면의 메뉴 글자를 읽어서 하므로 **몬헌 텍스트 언어가 한국어**이고, Windows 한국어 OCR과 가상 패드(ViGEmBus + vgamepad)가 있어야 합니다. 진행 중에는 마우스·키보드를 건드리지 마세요.
+   - **세이브 파일이 실제로 갱신된 경우에만 몬헌을 닫습니다.** 저장할 수 없으면(다른 언어, OCR·패드 없음, 필드·퀘스트, 로딩 중) 마크만 종료되고 몬헌은 그대로 열려 있습니다. 직접 저장(시작 메뉴 → 시스템 → 저장)한 뒤 몬헌을 끄세요. 결과는 `%TEMP%\mhwmc\exit.log`에 남습니다(성공 시 `saved through the menu (save file updated)`).
+   - 몬헌은 거점에서만 수동 저장이 되므로 F12는 거점에서 누르세요.
    - 강제 종료나 PC 꺼짐 시: 마크는 마지막 자동 저장(약 5분 간격), 몬헌은 마지막 자동/수동 저장까지 남습니다.
 
 | 키 | 동작 |
