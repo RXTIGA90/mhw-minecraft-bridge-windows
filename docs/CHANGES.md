@@ -97,3 +97,20 @@
 - Live (3840x2160 borderless, Seliana): official-launcher Minecraft + F12, and `Save-And-Quit.bat` with
   Minecraft closed, both logged `saved through the menu (save file updated)` and closed MHW. The
   left-open path (save not possible) was checked in code only.
+
+## Review follow-up (0.1.0-dev, second round)
+- Quit script: menu presses now go through the bridge's own pad channel (bridge.shm 0x80, merged by the DLL
+  into every connected XInput slot - the path Minecraft's M/R keys use). Presses through the virtual pad
+  were often ignored, and back-to-back Down presses got lost. The virtual pad stays connected so MHW keeps
+  polling. The save question is read several times, filtered and unfiltered. Tested from the package:
+  F12 saved through the menu and closed both games at 1920x1080, 2560x1440 and 3840x2160.
+- M (map) worked in every repeat here (4K and 1440p, with one and with two virtual pads, and with MHW in
+  keyboard mode); the review's failure could not be reproduced. README gained a short troubleshooting note.
+- `Install.ps1`: stops with a clear message when `graphics_option.ini` is missing (MHW never started).
+- `Uninstall.ps1`: when `dinput8.dll` differs from the package, keeps `mhwbridge-backup` so the install is
+  still recognised.
+- DLLs rebuilt with `tools/build-core.sh` (no work-in-progress internal names). `fabric.mod.json` lists
+  RXTIGA90 as author. THIRD_PARTY_NOTICES mentions the statically linked LLVM/mingw-w64 runtime.
+- README (both): Fabric installer steps, launcher "modded" warning, Alt+Tab when MHW covers the screen,
+  run MHW once before installing, same `-GameDir` for uninstall, FPS numbers with the render distance used,
+  Korean README "소개" heading.
